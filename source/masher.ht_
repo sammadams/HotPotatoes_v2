@@ -151,11 +151,14 @@ td{
 </ul>
 </div>
 </div>
+
+// displays a button to generate the score table; populates based on cookies
 <div class="IndexDiv">
 	<button type="button" onclick="fillScoreTable()" id="scoreButton">Generate Score</button>
 	<table class="Index" id="resultsTable">
 	</table>
 </div>
+
 </body>
 
 <!-- post-script -->
