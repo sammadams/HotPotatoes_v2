@@ -1,0 +1,15 @@
+
+[QuickTime Player]<audio controls><source src="[strFilePath]" type="audio/ogg"><source src="[strFilePath]" type="audio/mpeg">[strContent]</audio>[/QuickTime Player]
+
+[Windows Media Player]<video width="300" height="200" controls><source src="[strFilePath]" type="video/mp4"><video width="300" height="200" controls><source src="[strFilePath]" type="video/ogg">[strContent]</video>
+[/Windows Media Player]
+
+[Real Player]
+<object type="audio/x-pn-realaudio-plugin" classid="CLSID:CFCDAA03-8BE4-11cf-B84B-0020AFBBCCFA" width="[strWidth]" height="[strHeight]">
+<param name="type" value="audio/x-pn-realaudio-plugin" />
+<param name="src" value="[strFilePath]" />
+<param name="autostart" value="false" />
+<param name="controls" value="[inclVideo]ImageWindow,[/inclVideo]ControlPanel" /> 
+[strContent]</object>[/Real Player]
+
+[Flash Player]<object codebase="[strFilePath]" type="application/x-shockwave-flash" width="[strWidth]" height="[strHeight]" data="[strFilePath]"> <param name="movie" value="[strFilePath]" />[strContent]</object>[/Flash Player]

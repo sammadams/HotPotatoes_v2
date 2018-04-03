@@ -1,0 +1,215 @@
+<?xml version="1.0"?>
+       <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "xhtml11.dtd">
+       <html xmlns="http://www.w3.org/1999/xhtml"
+             xml:lang="en"><head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
+
+<title>
+[strPlainIndexTitle]
+</title>
+
+<!-- Made with executable version [strFullVersionInfo] -->
+
+<!-- The following insertion allows you to add your own code directly to this head tag from the configuration screen -->
+
+[strHeaderCode]
+
+<!-- insert index cookie print script -->
+<script>
+var docCookies = {
+  getItem: function (sKey) {
+    if (!sKey) { return null; }
+    return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
+  },
+  setItem: function (sKey, sValue, vEnd, sPath, sDomain, bSecure) {
+    if (!sKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)) { return false; }
+    var sExpires = "";
+    if (vEnd) {
+      switch (vEnd.constructor) {
+        case Number:
+          sExpires = vEnd === Infinity ? "; expires=Fri, 31 Dec 9999 23:59:59 GMT" : "; max-age=" + vEnd;
+          /*
+          Note: Despite officially defined in RFC 6265, the use of `max-age` is not compatible with any
+          version of Internet Explorer, Edge and some mobile browsers. Therefore passing a number to
+          the end parameter might not work as expected. A possible solution might be to convert the the
+          relative time to an absolute time. For instance, replacing the previous line with:
+          */
+          /*
+          sExpires = vEnd === Infinity ? "; expires=Fri, 31 Dec 9999 23:59:59 GMT" : "; expires=" + (new Date(vEnd * 1e3 + Date.now())).toUTCString();
+          */
+          break;
+        case String:
+          sExpires = "; expires=" + vEnd;
+          break;
+        case Date:
+          sExpires = "; expires=" + vEnd.toUTCString();
+          break;
+      }
+    }
+    document.cookie = encodeURIComponent(sKey) + "=" + encodeURIComponent(sValue) + sExpires + (sDomain ? "; domain=" + sDomain : "") + (sPath ? "; path=" + sPath : "") + (bSecure ? "; secure" : "");
+    return true;
+  },
+  removeItem: function (sKey, sPath, sDomain) {
+    if (!this.hasItem(sKey)) { return false; }
+    document.cookie = encodeURIComponent(sKey) + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT" + (sDomain ? "; domain=" + sDomain : "") + (sPath ? "; path=" + sPath : "");
+    return true;
+  },
+  hasItem: function (sKey) {
+    if (!sKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)) { return false; }
+    return (new RegExp("(?:^|;\\s*)" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=")).test(document.cookie);
+  },
+  keys: function () {
+    var aKeys = document.cookie.replace(/((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, "").split(/\s*(?:\=[^;]*)?;\s*/);
+    for (var nLen = aKeys.length, nIdx = 0; nIdx < nLen; nIdx++) { aKeys[nIdx] = decodeURIComponent(aKeys[nIdx]); }
+    return aKeys;
+  }
+};
+</script>
+
+<style type="text/css">
+
+body{
+	font-family: [strFontFace];
+[inclPageBGColor]	background-color: [strPageBGColor];[/inclPageBGColor]
+	color: [strTextColor];
+[inclGraphicURL]	background-image: url([strGraphicURL]);[/inclGraphicURL] 
+	padding-left: 5%;
+	padding-right: 5%;
+	font-size: [strFontSize];
+}
+
+div.Titles{
+	padding: 0.5em;;
+	text-align: center;
+	color: [strTitleColor];
+}
+
+.ExerciseTitle{
+	font-size: 140%;
+	color: [strTitleColor];
+}
+
+.ExerciseSubtitle{
+	font-size: 120%;
+	color: [strTitleColor];
+}
+
+div.IndexDiv{
+	margin-left: auto;
+	margin-right: auto;
+	padding: 2em;
+	border-style: solid;
+	border-width: 1px;
+	text-align: center;
+	width: 40%;
+	background-color: [strExBGColor];
+	color: [strTextColor];
+	font-size: 100%;
+}
+
+.Index{
+	text-align: left;
+	font-size: 100%;
+}
+
+a{
+	color: [strLinkColor];
+}
+
+a:visited{
+	color: [strVLinkColor];
+}
+
+a:hover{
+	color: [strLinkColor];
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+};
+
+td{
+	width: 100%;
+	border: 1px solid black;
+};
+
+
+</style>
+</head>
+<body>
+
+<div class="Titles">
+	<h2 class="ExerciseTitle">[strIndexTitle]</h2>
+</div>
+
+<div style="text-align: center;">
+<div class="IndexDiv">
+<ul class="Index">
+[BeginIndexItem]<li><a href="[strIndexItemURL]">[strIndexItemTitle]</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>[EndIndexItem]
+</ul>
+</div>
+</div>
+<div class="IndexDiv">
+	<button type="button" onclick="fillScoreTable()" id="scoreButton">Generate Score</button>
+	<table class="Index" id="resultsTable">
+	</table>
+</div>
+</body>
+
+<!-- post-script -->
+<script>
+//fill table cell by id
+function fillEachScore(number){
+		document.getElementById("exerciseName_" + number).innerHTML = docCookies.getItem("exerciseName_" + number);
+		document.getElementById("exerciseScore_" + number).innerHTML = docCookies.getItem("exerciseScore_" + number);
+		document.getElementById("exerciseTime_" + number).innerHTML = docCookies.getItem("exerciseTime_" + number);
+};
+// remove elements
+function removeElement(element) {
+    element && element.parentNode && element.parentNode.removeChild(element);
+}
+
+var cookieNumber = docCookies.keys().length;
+var allCookies = docCookies.keys();
+var lastCookie = allCookies[allCookies.length - 1];
+var exerciseCount = lastCookie.substr(lastCookie.length - 1);
+console.log("Exercises are " + exerciseCount);
+
+function fillScoreTable(){
+	if (exerciseCount < 1){
+		alert("No scores are recorded!");
+	}
+	else {
+		var resultsTable = document.getElementById('resultsTable');
+		resultsTable.innerHTML = "<tr><th>Exercise Name</th><th>Score</th><th>Completion time</th></tr>";	
+			
+		function appendElements(){
+		tr.appendChild(td1);
+		tr.appendChild(td2);
+		tr.appendChild(td3);
+		resultsTable.appendChild(tr);
+		};
+		
+		console.log("cookies are " + cookieNumber);
+		
+		for (var i = 1; i <= exerciseCount; i++){
+			var tr = document.createElement('tr');
+			var td1 = document.createElement('td');
+			var td2 = document.createElement('td');
+			var td3 = document.createElement('td');
+			tr.setAttribute("id", 'exercise_' + i);
+			td1.setAttribute("id", 'exerciseName_' + i);
+			td2.setAttribute("id", 'exerciseScore_' + i);
+			td3.setAttribute("id", 'exerciseTime_' + i);
+			
+			appendElements();
+			fillEachScore(i);
+			removeElement(document.getElementById('scoreButton'));
+		};
+	};
+};
+
+</script>
+</html>
